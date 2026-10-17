@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body { @apply bg-ivory font-sans text-ink antialiased; }
+  h1, h2, h3 { @apply font-serif text-forest; }
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 2px solid #243D32; outline-offset: 2px;
+  }
+}
+@layer components {
+  .card { @apply rounded-lg border border-sand bg-white/60 p-5; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-md bg-forest px-4 py-2 text-sm font-medium text-ivory transition hover:bg-forest/90 disabled:cursor-not-allowed disabled:opacity-50; }
+  .btn-ghost { @apply inline-flex items-center justify-center gap-2 rounded-md border border-sand bg-transparent px-4 py-2 text-sm font-medium text-forest transition hover:bg-eucalyptus; }
+  .input { @apply w-full rounded-md border border-sand bg-ivory px-3 py-2 text-sm; }
+  .label { @apply mb-1 block text-xs font-medium uppercase tracking-wide text-muted; }
+}
