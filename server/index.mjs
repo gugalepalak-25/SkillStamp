@@ -173,7 +173,14 @@ async function authenticate(req, res, next) {
   const challenge = challenges.get(address);
   if (!ADDR.test(address || "") || !signature || !challenge || challenge.expires < Date.now()) {
     return res.status(401).json({ error: "Wallet signature required. Request a fresh challenge and sign it in your wallet." });
-  }function readEvidenceStore() {
+  }
+  const valid = await verifySignedMessage(address, challenge.message, signature);
+  challenges.delete(address);
+  if (!valid) return res.status(401).json({ error: "Wallet signature is invalid or expired." });
+  next();
+}
+
+function readEvidenceStore() {
   try {
     return JSON.parse(fs.readFileSync(EVIDENCE_STORE, "utf8"));
   } catch {
@@ -259,11 +266,6 @@ app.get("/api/evidence/:address", authenticate, (req, res) => {
 
   res.json({ submissions });
 });
-  const valid = await verifySignedMessage(address, challenge.message, signature);
-  challenges.delete(address);
-  if (!valid) return res.status(401).json({ error: "Wallet signature is invalid or expired." });
-  next();
-}
 app.get("/api/store/:address", authenticate, (req, res) => {
   res.json(readStore()[req.params.address.toLowerCase()] ?? { saved: {} });
 });

@@ -3,7 +3,7 @@ import { FormEvent, useState } from "react";
 import { useWallet } from "../hooks/useWallet";
 import { Notice } from "../components/ui";
 
-const API = "http://localhost:8787";
+const API = "";
 
 export default function Evidence() {
   const w = useWallet();

@@ -11,7 +11,8 @@
     "typecheck": "tsc -p tsconfig.app.json --noEmit",
     "build": "tsc -p tsconfig.app.json --noEmit && vite build",
     "preview": "vite preview",
-    "test:opportunities": "node --test test/opportunities.test.mjs"
+    "test:opportunities": "node --test test/opportunities.test.mjs",
+    "test:api": "node --test test/api.test.mjs"
   },
   "dependencies": {
     "cors": "^2.8.5",
